@@ -7,7 +7,7 @@ import FriendList from '../components/FriendList';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 
-const Profile = () => {
+const Profile = (props) => {
 
   const { username: userParam } = useParams();
 
