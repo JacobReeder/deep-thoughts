@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
+import Auth from '../utils/auth';
+
 const Signup = () => {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' });
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -16,22 +18,22 @@ const Signup = () => {
     });
   };
 
-  // submit form
+  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-  };
+  
 
-   // use try/catch instead of promises to handle errors
    try {
-    // execute addUser mutation and pass in variable data from form
+    
     const { data } = await addUser({
-      variables: { ...formState }
+      variables: { ...formState },
     });
-    console.log(data);
+
+    Auth.login(data.addUser.token);
   } catch (e) {
     console.error(e);
   }
-
+};
 
   return (
     <main className='flex-row justify-center mb-4'>
@@ -69,16 +71,15 @@ const Signup = () => {
               />
               <button className='btn d-block w-100' type='submit'>
                 Submit
-              </button>
-              {error && <div>Sign up failed</div>}
+              </button>             
             </form>
-            {error && <div>Login failed</div>}
+            
+            {error && <div>Sign up failed</div>}
           </div>
         </div>
       </div>
     </main>
   );
 };
-
 
 export default Signup;
