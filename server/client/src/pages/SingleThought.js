@@ -34,7 +34,8 @@ const SingleThought = props => {
           <p>{thought.thoughtText}</p>
         </div>
       </div>
-
+      {Auth.loggedIn() && <ReactionForm thoughtId={thought._id} />}
+      
       {thought.reactionCount > 0 && (
         <ReactionList reactions={thought.reactions} />
       )}

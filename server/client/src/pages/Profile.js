@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
+import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
 import FriendList from '../components/FriendList';
 
@@ -78,6 +79,7 @@ if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
       </div>
 
       </div>
+      <div className="mb-3">{!userParam && <ThoughtForm />}</div>
     </div>
   );
 };
